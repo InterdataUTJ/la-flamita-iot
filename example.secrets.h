@@ -1,0 +1,3 @@
+#define SECRET_SSID "WIFI"
+#define SECRET_PSW "PASSWORD"
+#define SECRET_SERVER "http://127.0.0.1:5500/"
