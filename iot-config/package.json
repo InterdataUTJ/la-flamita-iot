@@ -1,14 +1,33 @@
 {
-  "name": "iot-config",
+  "name": "la-flamita-iot",
   "version": "1.0.0",
-  "description": "Electron app to configure IoT sensors for la-flamita",
+  "description": "La flamita IoT ElectronJS tool",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "4.21.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InterdataUTJ/la-flamita-iot.git"
+  },
+  "keywords": [
+    "la-flamita-iot",
+    "la-flamita",
+    "iot",
+    "IoT",
+    "esp32",
+    "arduino",
+    "cpp",
+    "c++"
+  ],
+  "author": "InterdataUTJ",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/InterdataUTJ/la-flamita-iot/issues"
+  },
+  "homepage": "https://github.com/InterdataUTJ/la-flamita-iot#readme",
+  "devDependencies": {
+    "electron": "32.1.2"
   }
 }

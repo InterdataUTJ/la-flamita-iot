@@ -1,19 +1,15 @@
-const express = require('express')
-const app = express()
-const port = 5500
+import { app, BrowserWindow } from 'electron';
 
-app.use(express.json());
+const createWindow = () => {
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    autoHideMenuBar: true,
+  })
 
-app.get('/', (req, res) => {
-  console.log(req.url);
-  res.send('OK');
-})
+  win.loadFile('index.html')
+}
 
-app.post('/', (req, res) => {
-  console.log(req.body);
-  res.status(201).send('OK');
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.whenReady().then(() => {
+  createWindow()
 })
