@@ -12,7 +12,7 @@
   <a href="https://www.electronjs.org/es/"><img src="https://img.shields.io/badge/Tool-ElectronJS-royalblue.svg?logo=electron" alt="js-semistandard-style"></a>
 </p>
 
-> [!NOTE]  
+> [!NOTE]
 > Este es un `submodule` que forma parte del proyecto [`la-flamita`](https://github.com/InterdataUTJ/la-flamita/).
 
 Desarrollo de IoT para taquería la flamita. La solución se enfoca en aplicar sensores de temperatura modulares que se integren fácilmente con la `API` desarrollada en [`la-flamita-web`](https://github.com/InterdataUTJ/la-flamita-web/) para poder monitorearse.
