@@ -2,7 +2,7 @@
 
 El módulo puede funcionar con baterías o sin baterías, estas solo se conectan a los pines Vin de entrada del ESP32, por lo que no afecta para nada al funcionamiento, comprueba la guía de conexiones para más información.
 
-> [!WARNING]  
+> [!WARNING]
 > El firmware usa la biblioteca [`Preferences`](https://docs.espressif.com/projects/arduino-esp32/en/latest/tutorials/preferences.html) de `ESP32`, por lo que podria no funcionar en otra placa de desarrollo.
 
 Los componentes básicos del módulo son los siguientes:
