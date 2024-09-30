@@ -9,6 +9,7 @@
   
 class Configurator {
   private:
+    bool configNeeded;
     bool configMode;
     bool wifiConnected;
     RGBLed* rgb;;
@@ -18,13 +19,17 @@ class Configurator {
     String WIFI_SSID;
     String WIFI_PASS;
 
-    void config();
+    bool config();
     bool checkConfig();
 
   public: 
     Configurator();
-    void begin();
-    void step();
+    bool begin();
+    bool step();
+    bool needConfig();
+    void askConfig();
+    String getApiKey();
+    String getApiServer();
 };
 
 #endif

@@ -5,13 +5,18 @@
   
 class Send {
   private:
-    String url;
+    short FAILED_COUNTER = 0;
+    String API_SERVER;
+    String API_KEY;
     String json(float humidity, float tempeture);
 
   public: 
-    Send(String new_url);
-    void setUrl(String new_url);
-    bool data(float humidity, float tempeture);
+    Send();
+    Send(String newAPiServer, String newApiKey);
+    void setApiServer(String newApiServer);
+    void setApiKey(String newApiKey);
+    void setApi(String newApiServer, String newApiKey);
+    int data(float humidity, float tempeture);
 };
 
 #endif
