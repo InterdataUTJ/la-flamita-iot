@@ -16,6 +16,5 @@ benchmarks/graphs
 # https://git-scm.com/docs/gitignore
 
 # Arduino
-secrets.h
 .vscode/
 build/
