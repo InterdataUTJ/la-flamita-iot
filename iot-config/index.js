@@ -2,7 +2,8 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { __dirname } from './utils/dirname.js';
 
-import { list, open, close, setSSID, setPass, setApiKey, setApiServer, clear } from './utils/serial.js';
+import serial from './utils/serial.js';
+import wifi from './utils/wifi.js';
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -18,13 +19,16 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
-  ipcMain.handle('serial:list', list);
-  ipcMain.handle('serial:open', open);
-  ipcMain.handle('serial:close', close);
-  ipcMain.handle('serial:setSSID', setSSID);
-  ipcMain.handle('serial:setPass', setPass);
-  ipcMain.handle('serial:setApiKey', setApiKey);
-  ipcMain.handle('serial:setApiServer', setApiServer);
-  ipcMain.handle('serial:clear', clear);
+  ipcMain.handle('serial:list', serial.list);
+  ipcMain.handle('serial:open', serial.open);
+  ipcMain.handle('serial:close', serial.close);
+  ipcMain.handle('serial:setSSID', serial.setSSID);
+  ipcMain.handle('serial:setPass', serial.setPass);
+  ipcMain.handle('serial:setApiKey', serial.setApiKey);
+  ipcMain.handle('serial:setApiServer', serial.setApiServer);
+  ipcMain.handle('serial:clear', serial.clear);
+
+  ipcMain.handle('wifi:list', wifi.list);
+  ipcMain.handle('wifi:check', wifi.check);
   createWindow();
 });

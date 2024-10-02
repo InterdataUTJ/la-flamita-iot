@@ -2,12 +2,12 @@ import { SerialPort } from "serialport";
 
 const ports = {};
 
-export async function list() {
+async function list() {
   return SerialPort.list();
 }
 
 
-export function open(_, path) {
+function open(_, path) {
   return new Promise((resolve, reject) => {
     const port = new SerialPort({ path, baudRate: 115200 });
     ports[path] = port;
@@ -45,7 +45,7 @@ export function open(_, path) {
   });
 }
 
-export function close(_, path, instant = false) {
+function close(_, path, instant = false) {
   return new Promise((resolve, reject) => {
     if (instant) {
       ports[path]?.close();
@@ -82,7 +82,7 @@ export function close(_, path, instant = false) {
   });
 }
 
-export function setSSID(_, path, WIFI_SSID) {
+function setSSID(_, path, WIFI_SSID) {
   return new Promise((resolve, reject) => {
     const port = ports[path];
     if (!port) reject(new Error("Port not found"));
@@ -106,7 +106,7 @@ export function setSSID(_, path, WIFI_SSID) {
 }
 
 
-export function setPass(_, path, WIFI_PASS) {
+function setPass(_, path, WIFI_PASS) {
   return new Promise((resolve, reject) => {
     const port = ports[path];
     if (!port) reject(new Error("Port not found"));
@@ -130,7 +130,7 @@ export function setPass(_, path, WIFI_PASS) {
 }
 
 
-export function setApiKey(_, path, API_KEY) {
+function setApiKey(_, path, API_KEY) {
   return new Promise((resolve, reject) => {
     const port = ports[path];
     if (!port) reject(new Error("Port not found"));
@@ -154,7 +154,7 @@ export function setApiKey(_, path, API_KEY) {
 }
 
 
-export function setApiServer(_, path, API_SERVER ) {
+function setApiServer(_, path, API_SERVER ) {
   return new Promise((resolve, reject) => {
     const port = ports[path];
     if (!port) reject(new Error("Port not found"));
@@ -177,7 +177,7 @@ export function setApiServer(_, path, API_SERVER ) {
   });
 }
 
-export function clear(_, path ) {
+function clear(_, path ) {
   return new Promise((resolve, reject) => {
     const port = ports[path];
     if (!port) reject(new Error("Port not found"));
@@ -196,3 +196,5 @@ export function clear(_, path ) {
     });
   });
 }
+
+export default {list, open, close, setSSID, setPass, setApiKey, setApiServer, clear};

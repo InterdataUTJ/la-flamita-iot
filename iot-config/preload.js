@@ -10,5 +10,10 @@ contextBridge.exposeInMainWorld("laFlamita", {
     setApiKey: (path, apiKey) => ipcRenderer.invoke("serial:setApiKey", path, apiKey),
     setApiServer: (path, apiServer) => ipcRenderer.invoke("serial:setApiServer", path, apiServer),
     clear: (path) => ipcRenderer.invoke("serial:clear", path),
-  } 
+  },
+
+  wifi: {
+    list: () => ipcRenderer.invoke("wifi:list"),
+    check: () => ipcRenderer.invoke("wifi:check"),
+  }, 
 });
