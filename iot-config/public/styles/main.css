@@ -1,0 +1,17 @@
+main {
+  margin: auto;
+  flex-grow: 1;
+  width: 90%;
+  max-width: 1000px;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+main > h2 {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

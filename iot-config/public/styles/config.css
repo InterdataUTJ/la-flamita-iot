@@ -1,0 +1,20 @@
+main > h2 > span.device-path {
+  font-size: 1rem;
+  background-color: var(--color-2);
+  padding: 8px;
+  border-radius: 7px;
+}
+
+main > h2 > span.back {
+  user-select: none;
+  cursor: pointer;
+  transition: scale 0.2s ease-in-out;
+}
+
+main > h2 > span.back:hover {
+  scale: 1.5;
+}
+
+main > h2 > span.title {
+  flex-grow: 1;
+}

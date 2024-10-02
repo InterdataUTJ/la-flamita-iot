@@ -1,0 +1,18 @@
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: var(--color-1);
+  user-select: none;
+}
+
+header > img {
+  width: 30px;
+  height: 30px;
+}
+
+header > h1 {
+  font-weight: 900;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,20 @@
+:root {
+  --color-1: #FFAD33;
+  --color-2: #F37649;
+  --color-3: #D56275;
+  --color-4: #9F5095;
+  --color-5: #5A4C9E;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
