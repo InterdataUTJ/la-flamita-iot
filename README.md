@@ -28,3 +28,8 @@ Puedes consultar la documentación en los siguientes enlaces.
 - [Diagrama IoT](./docs/arduino/Diagram.md)
 - [Materiales](./docs/arduino/Materials.md)
 - [Conexiones](./docs/arduino/Connections.md)
+
+### Modulo de Configuración 🛠️
+- [Como compilar la herramienta de configuración](./docs/electron/Build.md)
+- [Como usar el software de configuración](./docs/electron/Usage.md)
+- [Requisitos de configuración](./docs/electron/Requirements.md)
