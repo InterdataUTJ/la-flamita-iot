@@ -8,9 +8,9 @@
 
 #define PREFERENCES_PARTITION "la-flamita-iot"
 
-#define RED_LED_PIN   18
-#define GREEN_LED_PIN 19
-#define BLUE_LED_PIN  21
+#define DEFAULT_RED_LED_PIN   18
+#define DEFAULT_GREEN_LED_PIN 19
+#define DEFAULT_BLUE_LED_PIN  21
 
 Configurator::Configurator() {
   configNeeded = false;
@@ -27,7 +27,23 @@ bool Configurator::begin() {
   // Setup mode
   Serial.begin(115200);
   Serial.println("[SYSTEM] Starting system.");
-  rgb = new RGBLed(RED_LED_PIN, GREEN_LED_PIN, BLUE_LED_PIN, RGBLed::COMMON_CATHODE);
+  rgb = new RGBLed(DEFAULT_RED_LED_PIN, DEFAULT_GREEN_LED_PIN, DEFAULT_BLUE_LED_PIN, RGBLed::COMMON_CATHODE);
+  rgb->brightness(RGBLed::YELLOW, 100);
+
+  pref.begin(PREFERENCES_PARTITION);
+  WIFI_SSID = pref.getString("WIFI_SSID", "");
+  WIFI_PASS = pref.getString("WIFI_PASS", "");
+  API_KEY = pref.getString("API_KEY", "");
+  API_SERVER = pref.getString("API_SERVER", "");
+
+  return checkConfig();
+}
+
+bool Configurator::begin(int redPin, int greenPin, int bluePin, bool common) {
+  // Setup mode
+  Serial.begin(115200);
+  Serial.println("[SYSTEM] Starting system.");
+  rgb = new RGBLed(redPin, greenPin, bluePin, common);
   rgb->brightness(RGBLed::YELLOW, 100);
 
   pref.begin(PREFERENCES_PARTITION);

@@ -3,20 +3,25 @@
 #include "Send.h"
 #include "Configurator.h"
 
-#define DHT_PIN 4
+#define RED_LED_PIN   25
+#define GREEN_LED_PIN 26
+#define BLUE_LED_PIN  27
+#define RGB_LED_COMMON false // Catodo
+
+#define DHT_PIN 14
 #define DHT_TYPE DHT11
 #define SENDER_DELAY 5000
 
 Configurator config;
 Send sender;
-DHT dht(DHT_PIN, DHT11);
+DHT dht(DHT_PIN, DHT_TYPE);
 unsigned long nextSend = 0;
 
 
 
 void setup() {
   dht.begin();
-  if (config.begin()) {
+  if (config.begin(RED_LED_PIN, GREEN_LED_PIN, BLUE_LED_PIN, RGB_LED_COMMON)) {
     sender.setApi(config.getApiServer(), config.getApiKey());
   }
 }

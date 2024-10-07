@@ -25,6 +25,7 @@ class Configurator {
   public: 
     Configurator();
     bool begin();
+    bool begin(int redPin, int greenPin, int bluePin, bool common);
     bool step();
     bool needConfig();
     void askConfig();
