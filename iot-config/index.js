@@ -10,6 +10,7 @@ const createWindow = () => {
     width: 800,
     height: 600,
     autoHideMenuBar: true,
+    icon: path.join(__dirname, "public/images/favicon.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -17,6 +18,12 @@ const createWindow = () => {
 
   win.loadFile("public/index.html");
 }
+
+app.on('window-all-closed', function(){
+  serial.close();
+  if(process.platform != 'darwin')
+      app.quit();
+});
 
 app.whenReady().then(() => {
   ipcMain.handle('serial:list', serial.list);
@@ -29,6 +36,5 @@ app.whenReady().then(() => {
   ipcMain.handle('serial:clear', serial.clear);
 
   ipcMain.handle('wifi:list', wifi.list);
-  ipcMain.handle('wifi:check', wifi.check);
   createWindow();
 });

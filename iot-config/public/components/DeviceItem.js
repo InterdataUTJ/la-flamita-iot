@@ -29,7 +29,7 @@ class DeviceItem extends HTMLElement {
 
         await window.laFlamita.serial.open(this.path)
           .then(isAvailable => {
-            if (isAvailable) window.location.replace(`device.html?path=${encodeURIComponent(this.path)}`);
+            if (isAvailable) window.location.replace('device.html');
             else alert('El dispositivo no es compatible');
           })
           .catch(err => {
