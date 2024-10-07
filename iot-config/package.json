@@ -1,6 +1,6 @@
 {
   "name": "la-flamita-iot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "La flamita IoT ElectronJS tool",
   "type": "module",
   "main": "index.js",
