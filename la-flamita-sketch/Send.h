@@ -1,8 +1,8 @@
 #ifndef SEND_H
 #define SEND_H
-
 #include <Arduino.h>
-  
+#include <ArduinoJson.h>
+
 class Send {
   private:
     short FAILED_COUNTER = 0;
@@ -13,10 +13,8 @@ class Send {
   public: 
     Send();
     Send(String newAPiServer, String newApiKey);
-    void setApiServer(String newApiServer);
-    void setApiKey(String newApiKey);
     void setApi(String newApiServer, String newApiKey);
-    int data(float humidity, float tempeture);
+    int send(JsonDocument document);
 };
 
 #endif
