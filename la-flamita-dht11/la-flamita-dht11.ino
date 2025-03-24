@@ -32,6 +32,7 @@ bool tonoActual = false;
 #define DHT_PIN 14
 #define DHT_TYPE DHT11
 #define DHT_CONFIG_SLOT 0
+#define DHT_TEMP_LIMIT 35
 DHT dht(DHT_PIN, DHT_TYPE);
 Send dht11Sender;
 
@@ -95,13 +96,34 @@ void askTimerCallback() {
 
 void senderTimerCallback() {
   if (config.canSend(DHT_CONFIG_SLOT)) {
-    int state = dht11Sender.send(getData());
+    JsonDocument data = getData();
+
+    if (data["dato"]["Temperatura"]) {
+      if (data["dato"]["Temperatura"] >= DHT_TEMP_LIMIT) {
+        bleCallback(); // Iniciar alarma
+      }
+    }
+
+    int state = dht11Sender.send(data);
     if (state == 2) config.askConfig();
   }
 }
 
 void bleCallback() {
   Serial.println("[BLE] Alarma activada");
+  estadoBuzzer = true;
+  digitalWrite(LED_PIN, HIGH);
+
+  // Enviar estado al servidor
+  JsonDocument estadoEncendido;
+  estadoEncendido["dato"] = "1";
+  if (config.canSend(LED_CONFIG_SLOT)) {
+    ledSender.send(estadoEncendido);
+  }
+
+  if (config.canSend(BUZZER_CONFIG_SLOT)) {
+    buzzerSender.send(estadoEncendido);
+  }
 }
 
 
