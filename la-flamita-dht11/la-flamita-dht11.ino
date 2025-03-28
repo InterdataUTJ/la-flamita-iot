@@ -32,7 +32,8 @@ bool tonoActual = false;
 #define DHT_PIN 14
 #define DHT_TYPE DHT11
 #define DHT_CONFIG_SLOT 0
-#define DHT_TEMP_LIMIT 35
+#define DHT_LECT_LIMIT 35
+bool estadoLect = false;
 DHT dht(DHT_PIN, DHT_TYPE);
 Send dht11Sender;
 
@@ -103,12 +104,26 @@ void senderTimerCallback() {
   if (config.canSend(DHT_CONFIG_SLOT)) {
     JsonDocument data = getData();
 
-    if (data["dato"]["Temperatura"][0] && data["dato"]["Temperatura"][0] == "nan") return;
-    if (data["dato"]["Humedad"][0] && data["dato"]["Humedad"][0] == "nan") return;
+    if (data["dato"]["Temperatura"][0] && data["dato"]["Temperatura"][0] == "nan") {
+      Serial.println("[SENSOR] lectura Temperatura: nan");
+      return;
+    }
+    if (data["dato"]["Humedad"][0] && data["dato"]["Humedad"][0] == "nan") {
+      Serial.println("[SENSOR] lectura Humedad: nan");
+      return;
+    }
 
-    if (data["dato"]["Temperatura"]) {
-      if (data["dato"]["Temperatura"] >= DHT_TEMP_LIMIT) {
-        bleCallback(); // Iniciar alarma
+    if (data["dato"]["Humedad"][0]) {
+      String lect = data["dato"]["Humedad"][0];
+      Serial.print("[SENSOR] Lectura: ");
+      Serial.println(lect);
+      if (lect.toInt() >= DHT_LECT_LIMIT) {
+        if (!estadoLect) {
+          bleCallback(); // Iniciar alarma
+          estadoLect = true;
+        }
+      } else {
+        estadoLect = false;
       }
     }
 
