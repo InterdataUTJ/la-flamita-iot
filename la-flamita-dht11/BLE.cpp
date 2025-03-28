@@ -42,6 +42,7 @@ void BLE::client(String deviceName){
       BLEAdvertisedDevice device = foundDevices->getDevice(i);
       if (device.haveServiceUUID() && device.getServiceUUID().equals(BLEUUID(SERVICE_UUID))) {
           pClient->connect(&device);
+          Serial.println("[BLE] Conectado al servidor BLE!");
           BLERemoteService* pRemoteService = pClient->getService(SERVICE_UUID);
           if (pRemoteService) {
               pRemoteCharacteristic = pRemoteService->getCharacteristic(CHARACTERISTIC_UUID);

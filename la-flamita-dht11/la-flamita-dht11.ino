@@ -60,9 +60,14 @@ TickTwo buzzerTimer(buzzerToneStep, BUZZER_INTERVALO);
 JsonDocument getData() {
   JsonDocument root;
   JsonDocument dato;
-  
-  dato["Temperatura"] = dht.readTemperature();
-  dato["Humedad"] = dht.readHumidity();
+
+  JsonArray temperatura = dato.createNestedArray("Temperatura");
+  temperatura.add(String(dht.readTemperature()));
+  temperatura.add("°C");
+
+  JsonArray humedad = dato.createNestedArray("Humedad");
+  humedad.add(String(dht.readHumidity()));
+  humedad.add("%");
 
   root["dato"] = dato;
   return root;
@@ -97,6 +102,9 @@ void askTimerCallback() {
 void senderTimerCallback() {
   if (config.canSend(DHT_CONFIG_SLOT)) {
     JsonDocument data = getData();
+
+    if (data["dato"]["Temperatura"][0] && data["dato"]["Temperatura"][0] == "nan") return;
+    if (data["dato"]["Humedad"][0] && data["dato"]["Humedad"][0] == "nan") return;
 
     if (data["dato"]["Temperatura"]) {
       if (data["dato"]["Temperatura"] >= DHT_TEMP_LIMIT) {

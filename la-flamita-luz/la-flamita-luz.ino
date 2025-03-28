@@ -10,7 +10,7 @@ BLE bleClient;
 
 
 // Sensor CONFIG
-#define SENSOR_PIN 14
+#define SENSOR_PIN 4
 #define SENSOR_CONFIG_SLOT 0
 #define SENSOR_TIMES_ALARM 6 // Times open to activate alarm
 Send sensorSender;
@@ -34,9 +34,15 @@ TickTwo senderTimer(senderTimerCallback, SENDER_DELAY);
 JsonDocument getData() {
   JsonDocument root;
   JsonDocument dato;
-  dato["Estado"] = (digitalRead(SENSOR_PIN) == HIGH ? "1" : "0");
+  String estadoString = (digitalRead(SENSOR_PIN) == HIGH ? "0" : "1");
+  JsonArray estado = dato.createNestedArray("Estado");
+  estado.add(estadoString);
+  estado.add(" ");
 
-  if (dato["Estado"] == "1") timesOpen++;
+  Serial.print("[SENSOR] Data ");
+  Serial.println(estadoString);
+
+  if (estadoString == "1") timesOpen++;
   else timesOpen = 0;
 
   root["dato"] = dato;
@@ -52,6 +58,7 @@ void senderTimerCallback() {
   }
 
   if (timesOpen >= SENSOR_TIMES_ALARM) {
+    Serial.println("[BLE] Turn ON alarm");
     bleClient.send("[BLE] Turn ON alarm");
   }
 }
